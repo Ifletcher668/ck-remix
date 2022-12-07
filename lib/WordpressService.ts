@@ -33,26 +33,24 @@ export async function getPosts() {
 
 export async function getPostBySlug(slug) {
   const query = gql`
-    query GetPosts($id: ID!) {
+    query GetPostBySlug($id: ID!) {
       post(id: $id, idType: SLUG) {
-        nodes {
-          author {
-            node {
-              firstName
-              lastName
-            }
+        author {
+          node {
+            firstName
+            lastName
           }
-          content
-          date
-          id
-          slug
-          title
         }
+        content
+        date
+        id
+        slug
+        title
       }
     }
   `;
   const response = await client.query({ query, variables: { id: slug } });
-  const data = response.data?.posts?.nodes;
+  const data = response.data?.post;
 
   return data;
 }

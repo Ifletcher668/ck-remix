@@ -4,7 +4,6 @@ import { getPostBySlug } from "lib/WordpressService";
 
 export const loader: LoaderFunction = async (data) => {
   const slug = data.params.slug;
-
   const post = await getPostBySlug(slug);
 
   return post;
