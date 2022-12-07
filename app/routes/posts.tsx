@@ -1,10 +1,13 @@
 import type { LinksFunction, LoaderFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Link, useCatch, useLoaderData } from "@remix-run/react";
 import { getPosts } from "lib/WordpressService";
 import styles from "lib/styles/posts.css";
 
 export const loader: LoaderFunction = async () => {
   const posts = await getPosts();
+
+  if (!posts) throw json({ message: "Posts not found" }, 404);
 
   return posts;
 };
@@ -35,8 +38,13 @@ export default () => {
             </Link>
           ))}
         </div>
-        {/* <Outlet /> */}
       </div>
     </>
   );
+};
+
+export const CatchBoundary = () => {
+  const caught = useCatch();
+
+  return <p>{JSON.stringify(caught.data)}</p>;
 };

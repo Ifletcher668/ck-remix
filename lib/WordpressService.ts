@@ -31,7 +31,7 @@ export async function getPosts() {
   return data;
 }
 
-export async function getPostBySlug(slug) {
+export async function getPostBySlug(slug: string) {
   const query = gql`
     query GetPostBySlug($id: ID!) {
       post(id: $id, idType: SLUG) {
