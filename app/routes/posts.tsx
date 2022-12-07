@@ -26,7 +26,7 @@ export default () => {
           <h1 className="posts-page-title">Wordpress Posts</h1>
 
           {posts.map((post) => (
-            <Link to={post.slug} className="post" key={post.id}>
+            <Link to={`/post/${post.slug}`} className="post" key={post.id}>
               <h2>{post.title}</h2>
               {/* Parse html through a sanitizer first */}
               <div
@@ -35,7 +35,7 @@ export default () => {
             </Link>
           ))}
         </div>
-        <Outlet />
+        {/* <Outlet /> */}
       </div>
     </>
   );
